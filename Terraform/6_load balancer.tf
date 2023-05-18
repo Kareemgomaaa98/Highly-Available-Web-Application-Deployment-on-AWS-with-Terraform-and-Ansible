@@ -3,10 +3,10 @@ resource "aws_elb" "elb-1" {
   subnets            = [module.network.public1_id, module.network.public2_id]
   security_groups    = [module.network.security_group_id]
   listener {
-    instance_port     = 80
-    instance_protocol = "http"
-    lb_port           = 80
-    lb_protocol       = "http"
+    instance_port     = 5000
+    instance_protocol = "HTTP"
+    lb_port           = 5000
+    lb_protocol       = "HTTP"
   }
 
   health_check {
@@ -14,7 +14,7 @@ resource "aws_elb" "elb-1" {
     unhealthy_threshold = 2
     timeout             = 3
     interval            = 30
-    target              = "HTTP:80/"
+    target              = "HTTP:5000/"
   }
 
   # Define the instances to attach to the load balancer
